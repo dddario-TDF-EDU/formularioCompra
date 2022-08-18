@@ -1,0 +1,41 @@
+body {
+    background-color: #c3195d;
+  
+   
+}
+
+.navColor {
+    background-color: #f70776;  
+}
+
+.fuenteMarca {
+    font-family: 'Zhi Mang Xing';
+}
+
+.componentes {
+    background-color: #680747;
+}
+
+.esteticaBoton {
+    margin-top: 5vh;
+    height: 15vh;
+    border-radius: 100%;
+    width: 50%;
+}
+
+.aumentarTamanio {
+    height: 30vh;
+}
+
+.ocultarSINO {
+    display: none !important;
+}
+
+.centrarAcordion {
+    display: flex ;
+    justify-content: center !important;
+}
+
+.pedido {
+    width: 80vw;
+}
