@@ -1,7 +1,5 @@
 body {
     background-color: #c3195d;
-  
-   
 }
 
 .navColor {
@@ -17,14 +15,10 @@ body {
 }
 
 .esteticaBoton {
-    margin-top: 5vh;
+    margin-top: 1vh;
     height: 15vh;
     border-radius: 100%;
     width: 50%;
-}
-
-.aumentarTamanio {
-    height: 30vh;
 }
 
 .ocultarSINO {

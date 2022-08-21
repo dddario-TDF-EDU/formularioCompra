@@ -12,137 +12,114 @@
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-lg navColor">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand" href="#">Harleen helados</a>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Mis pedidos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled d-none" href="#" tabindex="-1" aria-disabled="true">Quejas y sugerencias</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Contacto</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Sobre nosotros</a>
-              </li>
+  <nav class="navbar navbar-expand-lg navColor">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Harleen helados</a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Mis pedidos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled d-none" href="#" tabindex="-1" aria-disabled="true">Quejas y sugerencias</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Contacto</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Sobre nosotros</a>
+            </li>
             </ul>
-          </div>
-        </div>
-      </nav>
-
-      <div class="container-fluid">
+      </div>
+    </div>
+  </nav>  
 
         <!-- VER COMO REACOMODAR LA PRESENTACION, EL BOTON EN UN DIV PROPIO? -->
 
-        <div class="container d-flex flex-column align-items-center">
-            <h1 class="text-center fuenteMarca">Harleen helados</h1>
-            <h3 class="text-center">arma tu pedido y te lo enviamos</h3>
-            <button type="button" class="componentes esteticaBoton"><h2 class="text-center fuenteMarca">Armar mi pedido</h2></button>
-
+  <div class="container-fluid d-flex flex-column align-items-center mt-1">
+    <h1 class="text-center fuenteMarca">Harleen helados</h1>
+    <h3 class="text-center">arma tu pedido y te lo enviamos</h3>
+    <!-- al boton se lo llama por el nombre del div que lo contiene -->
+    <button type="button" class="componentes esteticaBoton"><h2 class="text-center fuenteMarca">Armar mi pedido</h2></button>
+  </div>
           <!-- Este sector aparece solo una vez apretado el boton de "armar mi pedido" / Capturar los values de esta zona -->
 
-            <div id="ciudadEntrega" class="container d-flex flex-column align-items-center ocultarSINO">
-
-
-          <!-- buscar breakpoint para este DIV -->
-              <h2 class="text-center m-2">Indique su ciudad</h2>
-              
-              <div class="container-fluid d-flex flex-row justify-content-center">
-
-                <div class="row w-75 d-flex justify-content-center">
-
-                  <div class="form-check form-check-inline d-flex align-items-center col">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Ushuaia">
-                    <label class="form-check-label m-2" for="inlineRadio1"><h3> Ushuaia</h3> </label>
-                  </div>
-      
-                  <div class="form-check form-check-inline d-flex align-items-center col">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Tolhuin">
-                    <label class="form-check-label m-2" for="inlineRadio2"><h3> Tolhuin</h3></label>
-                  </div>
-                  <div class="form-check form-check-inline d-flex align-items-center col">
-                    <!-- USO DE DISABLED PARA BLOQUEAR UNA OPCION <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Rio Grande" disabled> -->
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Rio Grande">
-                    <label class="form-check-label m-2" for="inlineRadio3"><h3> Rio Grande</h3></label>
-                  </div>
-
-                </div>
-          
-                
-
+  <div id="ciudadEntrega" class="container d-flex flex-column align-items-center ocultarSINO">
+    <h2 class="text-center m-2">Indique su ciudad</h2>       
+      <div class="container-fluid d-flex flex-row justify-content-center">
+          <div class="d-flex flex-column justify-content-around">
+              <div class="form-check form-check-inline d-flex align-items-center ">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Ushuaia">
+                  <label class="form-check-label m-2" for="inlineRadio1"><h3> Ushuaia</h3> </label>
               </div>
-            
-              <button type="button" class="componentes esteticaBoton"><h2 class="text-center fuenteMarca">Confirmar</h2></button>
+              <div class="form-check form-check-inline d-flex align-items-center ">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Tolhuin">
+                  <label class="form-check-label m-2" for="inlineRadio2"><h3> Tolhuin</h3></label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center justify-content-center ">
+                  <!-- USO DE DISABLED PARA BLOQUEAR UNA OPCION <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Rio Grande" disabled> -->
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Rio Grande">
+                  <label class="form-check-label m-2" for="inlineRadio3"><h3> Rio Grande</h3></label>
+              </div>
 
             </div>
+                          
+        </div>
+              <!-- al boton se lo llama por el nombre del div que lo contiene -->
+    <button type="button" class="componentes esteticaBoton"><h2 class="text-center fuenteMarca">Confirmar</h2></button>
+
+  </div>
 
 
              <!--  Capturar los values de esta zona -->
-
-
-            <div id="armadoPedido" class="container-fluid d-flex flex-column">
-
-              <h2 class="text-center m-2">Envio para la ciudad de #CIUDAD#</h2>
-
-              <div class="accordion" id="accordionExample">
-
-                <!-- HACER QUE EL BOTON NO ESTE POR DEFECTO -->
-                
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      <h3>Helado por KG</h3>
-                    </button>
-                  </h2>
-                  <div id="collapseOne" class="accordion-collapse collapse show centrarAcordion" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body d-flex flex-column w-75">
-                      <label for="customRange3" class="form-label text-center">Indique cuantos KG quiere</label>
-                      <div id="cantKG">
-                        <div class="range ">
-                          <input type="range" class="form-range" min="0.5" max="2" step="0.5" id="customRange3" value="1" />
-                        </div>
-                        <p class="text-center">texto ejemplo:</p>
-                      </div>
-
+  <div id="armadoPedido" class="container-fluid d-flex flex-column w-75 ocultarSINO">
+    <h2 class="text-center m-2">Envio para la ciudad de <span>#CIUDAD#</span></h2>
+    <h3 class="text-center m-2">¿que vas a querer?</h3>
+    <div class="accordion" id="accordionExample">
+        <!-- HACER QUE EL BOTON NO ESTE POR DEFECTO//nose comooooo -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <h3>Helado por KG</h3>
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show centrarAcordion" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body d-flex flex-column w-75">
+                <label for="customRange3" class="form-label text-center">Indique cuantos KG quiere</label>
+                  <div id="cantKG">
+                    <div class="range ">
+                      <input type="range" class="form-range" min="0.5" max="2" step="0.5" id="customRange3" value="1" />
                     </div>
+                    <!-- aca va el p con la frase -->
                   </div>
-                </div>
-
-
-
-                <div id="postreEleccion" class="accordion-item">
-                  <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      <h3>Postres</h3>
-                    </button>
-                  </h2>
-                  <div id="collapseTwo" class="accordion-collapse collapse centrarAcordion" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                    <div class="accordion-body d-flex flex-column w-75">
-                      <p>rellenar con postres preparados</p>
-                    </div>
-                  </div>
-                </div>
-            
               </div>
-
             </div>
-
-
         </div>
-      </div>
+        <div id="postreEleccion" class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <h3>Postres</h3>
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse centrarAcordion" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+              <div class="accordion-body d-flex flex-column w-75">
+                <p>rellenar con postres preparados</p>
+              </div>
+            </div>
+        </div>
+            
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    <script src="js/interaccion.js"></script>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  <script src="js/interaccion.js"></script>
 </body>
 </html>
 
