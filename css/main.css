@@ -33,3 +33,19 @@ body {
 .pedido {
     width: 80vw;
 }
+
+.btnProceso {
+    width: 30vw;
+    border: 0px;
+    border-radius: 25px;
+    color: #fff;
+    background-color: #c3195d;
+}
+
+.btnProceso:hover{
+    background-color: #ff4545;
+}
+
+.btnProceso:active{
+    background-color: #ff4545;
+}
