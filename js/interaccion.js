@@ -1,150 +1,136 @@
-//contar pedidos de KG helado
-let cantPedidosPorKG = 0;
+import {
+    iniciarArray,
+    iniciarArrayBoolean,
+    maxSabores,
+    precioKG,
+    arrayPrecios,
+    mostrarBtnTotal,
+    ocultarSINO,
+    yaPodesPedir,
+    precioTotal,
+    calculandoTotal,
+    desAparecerSeccionKG,
+    desAparecerSeccionSabores,
+    desHacerBlock,
+    entornoMensajeError, 
+    cargaToastError,
+    mensajePedido,
+    mensajeTotal
 
-//quiero tomar el valor en "vivo"
-
-let valorVivo = Number(document.querySelector("#cantKG div input").value);
-let rango = document.querySelector("#cantKG div input");
-
-
-//Funcion del rango de KG
-
-        //codigo robado que chequea y actualiza el valor en TIEMPO "real"
-
-        let textoPrueba = document.createTextNode("");
-
-        rango.addEventListener("change", function() {
-            valorVivo =  Number(document.querySelector("#cantKG div input").value);
-            textoPrueba = document.querySelector("#cantKG p").innerText = "Usted eligio " + valorVivo  +"kg, puede seleccionar hasta "+ maxSabores(valorVivo) +" sabores.";
-
-        },false);
+} from "./datosYFunciones.js";
 
 // Funciones del boton "Armar mi pedido"
 
 let btnIntro=document.querySelector("div .esteticaBoton");
 
-
 btnIntro.addEventListener('click' ,() => {
-    document.querySelector("#ciudadEntrega").classList.toggle("ocultarSINO");
-    btnIntro.classList.toggle("ocultarSINO");
+    ocultarSINO(btnIntro);
+    ocultarSINO(document.querySelector("#ciudadEntrega"));
 })
 
 //Funciones del  boton confirmar ciudad
 
 let btnConfirmar =document.querySelector("#ciudadEntrega button");
-let ciudadElegida;
-let btnSabores = document.querySelector("#collapseOne div button");
+export let ciudadElegida;
 
 btnConfirmar.addEventListener('click' ,() => {
     let hayCiudad = false;
-    ciudadEnvio = document.querySelectorAll("#ciudadEntrega div div input");
-     for (let i=0;i<ciudadEnvio.length;i++){
-         if (ciudadEnvio[i].checked==true){
-             ciudadElegida=ciudadEnvio[i].value;
-             hayCiudad = true;
-             break;
+    let ciudadEnvio = document.querySelectorAll("#ciudadEntrega div div input");
+    for (let i=0;i<ciudadEnvio.length;i++){
+        if (ciudadEnvio[i].checked==true){
+            ciudadElegida = ciudadEnvio[i].value;
+            hayCiudad = true;
+            break;
          } 
      }
     if (hayCiudad===false){
-        //cartelAlerta("usted no selecciono una ciudad")
-        alert("usted no selecciono una ciudad");
+        cargaToastError("Usted no selecciono una ciudad");
     } else {
-        
-        desAparecerEleccionCiudad()
-
+        desAparecerEleccionCiudad();
         //solucion parcial a la aparicion por defecto de la seccion HELADO POR KG 
+        yaPodesPedir(); 
+    }      
+});
+
+
+//quiero tomar el valor en "vivo" de la eleccion de KG de helado
+
+export let valorVivo = Number(document.querySelector("#cantKG div input").value);
+let rango = document.querySelector("#cantKG div input");
+//export let textCantEleccion = document.createTextNode("");
+export let textCantEleccion = document.createTextNode("Usted eligio 1 kg, puede seleccionar hasta 4 sabores");
+
+//Funcion del rango de KG
+
+//codigo robado que chequea y actualiza el valor en TIEMPO "real"
+
         
-        document.querySelector("#collapseOne").classList.toggle("show");
 
-        document.querySelector("#armadoPedido h2 span").innerText=(ciudadElegida);
-        let KGselect = document.createElement("p");
-        textoPrueba = document.createTextNode("Usted eligio 1 kg, puede seleccionar hasta 4 sabores");
-        KGselect.appendChild(textoPrueba);
-        document.querySelector("#cantKG").appendChild(KGselect);
-        KGselect.classList.add("text-center");
-    }
+rango.addEventListener("change", function() {
+    valorKGActual();
+},false);
 
-         
-})
-
-//crear array eleccion sabores segun KG
-
-const cantMaxSabores = [3,4,6,8];
-
-function maxSabores(KG) {
-
-        switch (KG) {
-            case 0.5:
-                return cantMaxSabores[0];
-            case 1:
-                return cantMaxSabores[1];
-            case 1.5:
-                return cantMaxSabores[2];
-            case 2:
-                return cantMaxSabores[3];
-            default:
-                console.log("no deberia llegar a este punto");
-                break;
-        }
+function valorKGActual(){
+    valorVivo =  Number(document.querySelector("#cantKG div input").value);
+    textCantEleccion = document.querySelector("#cantKG p").innerText = "Usted eligio " + valorVivo  +"kg, puede seleccionar hasta "+ maxSabores(valorVivo) +" sabores.";
+        
 }
+
 
 //FUNCION btnSabores
 
-btnSabores.addEventListener('click' ,()=> {
-    desAparecerSabores();
-    desAparecerKG();
+let btnMostrarSabores = document.querySelector("#collapseOne div button"); //boton "Elegir Sabores"
+
+btnMostrarSabores.addEventListener('click' ,()=> {
+    desAparecerSeccionSabores();
+    desAparecerSeccionKG();
 })
 
 //Seccion para controlar la eleccion de sabores
-
-let saboresDisponibles = ['Chocolate','Cho. con almendras','Vainilla','Coco','Fru. del bosque','Banana Split','Granizado','Tiramisú','Cereza','DDL Granizado'];
 
 let auxEleccionSabor = new Array (10); //[0,1,2,3,4,5,6,7,8,9];
 
 let eleccionSabor = document.querySelectorAll("#armadoPedido .saborElegido");
 
-let formSabores = document.querySelector("#armadoPedido .seccionSabor");
+let nombreSabor = document.querySelectorAll("#armadoPedido .seccionSabor label");
 
 let btnConfirmarSabores = document.querySelector("#armadoPedido .seccionSabor button");
 
+let cantPedidosPorKG = 0;
+
 btnConfirmarSabores.addEventListener("click" , ()=>{
-    let totalElegidos = 0;
-    let condicionCompra = false;
-    let auxPedido = new Array(11);
-    iniciarArray(auxPedido);
+    inicializarAuxiliares();
     iniciarArrayBoolean(auxEleccionSabor);
     for (let i=0;i<auxEleccionSabor.length;i++){
         auxEleccionSabor[i]=eleccionSabor[i].checked;
         if (auxEleccionSabor[i]==true){
             totalElegidos++;
             auxPedido[i]=1;
-            console.log(totalElegidos)
+            auxNombres[i]= nombreSabor[i].innerText;
         }
     }
     
     if (totalElegidos<1){
-        alert("debe elegir al menos un sabor");
+        cargaToastError("Debe elegir al menos un sabor");
     } else if (totalElegidos>maxSabores(valorVivo)){
-        alert("usted no puede elegir más de "+ maxSabores(valorVivo) +" sabores");
+        cargaToastError("Usted no puede elegir más de "+ maxSabores(valorVivo) +" sabores");        
     } else {
         condicionCompra=true;
         //conteo para las variables necesarias para cargar al arrayPedidosKG
         auxPedido[10]=valorVivo;
         cantPedidosPorKG++;
         //Reestablecer la seccion.
-        desAparecerKG();
-        desAparecerSabores();
+        desAparecerSeccionKG();
+        desAparecerSeccionSabores();
         document.querySelector("#collapseOne").classList.toggle("show");
-        alert("Pedido sumado a su carrito.");
+        mensajePedido(valorVivo + " KG de helado:");
     }
 
     if (condicionCompra===true){
         arrayCarrito[0]=cantPedidosPorKG;
         cargaPedido(auxPedido,cantPedidosPorKG);
-        //no estoy seguro si es necesaria esta linea
-        iniciarArray(auxPedido);
         unchekForm(eleccionSabor);
-
+        mostrarBtnTotal();
     }
 
 
@@ -154,31 +140,30 @@ btnConfirmarSabores.addEventListener("click" , ()=>{
 
 let eleccionPostre = document.querySelectorAll("#armadoPedido .postreElegido");
 
+export let nombrePostres = document.querySelectorAll("#postreEleccion label");
+
 let auxEleccionPostre = new Array (eleccionPostre.length);
 
 let btnConfirmarPostres = document.querySelector("#postreEleccion .seccionPostres button");
 
 btnConfirmarPostres.addEventListener("click" , ()=> {
-    let totalElegidos = 0;
-    let condicionCompra = false;
-    let auxPedido = new Array(eleccionPostre.length);
-    iniciarArray(auxPedido);
+    inicializarAuxiliares();    
     iniciarArrayBoolean(auxEleccionPostre);
     for (let i=0;i<auxEleccionPostre.length;i++){
         auxEleccionPostre[i]=eleccionPostre[i].checked;
         if (auxEleccionPostre[i]==true){
             totalElegidos++;
             auxPedido[i]++;
-            console.log(totalElegidos);
+            auxNombres[i]= nombrePostres[i].innerText;
         }
     }
 
     if (totalElegidos<1){
-        alert("usted no eligio ningun postre");
+        cargaToastError("Usted no eligio ningun postre");
     }  else {
         condicionCompra=true;
         document.querySelector("#collapseTwo").classList.toggle("show");
-        alert("Pedido sumado a su carrito.");
+        mensajePedido("Postres añadidos:");
     }
 
     if (condicionCompra===true){
@@ -186,39 +171,38 @@ btnConfirmarPostres.addEventListener("click" , ()=> {
             arrayCarrito[i+1]=arrayCarrito[i+1]+auxPedido[i];
         }
         unchekForm(eleccionPostre);
+        mostrarBtnTotal();
     }
-
 })
 
 //BOTON CONFIRMAR EXTRAS
 
 let eleccionExtras = document.querySelectorAll("#armadoPedido .extraElegido");
 
+export let nombreExtras = document.querySelectorAll("#extrasEleccion label");
+
 let auxEleccionExtras = new Array (eleccionExtras.length);
 
 let btnConfirmarExtras = document.querySelector("#extrasEleccion .seccionExtras button");
 
 btnConfirmarExtras.addEventListener("click" , ()=> {
-    let totalElegidos = 0;
-    let condicionCompra = false;
-    let auxPedido = new Array(eleccionExtras.length);
-    iniciarArray(auxPedido);
+    inicializarAuxiliares();
     iniciarArrayBoolean(auxEleccionExtras);
     for (let i=0;i<auxEleccionExtras.length;i++){
         auxEleccionExtras[i]=eleccionExtras[i].checked;
         if (auxEleccionExtras[i]==true){
             totalElegidos++;
             auxPedido[i]++;
-            console.log(totalElegidos);
+            auxNombres[i]= nombreExtras[i].innerText;
         }
     }
 
     if (totalElegidos<1){
-        alert("usted no eligio ningun extra");
+        cargaToastError("Usted no eligio ningun extra");
     }  else {
         condicionCompra=true;
         document.querySelector("#collapseThree").classList.toggle("show");
-        alert("Pedido sumado a su carrito.");
+        mensajePedido("Extras añadidos:");
     }
 
     if (condicionCompra===true){
@@ -226,29 +210,34 @@ btnConfirmarExtras.addEventListener("click" , ()=> {
             arrayCarrito[i+7]=arrayCarrito[i+7]+auxPedido[i];
         }
         unchekForm(eleccionExtras);
+        mostrarBtnTotal();
     }
-
 })
 
+//BOTON para regresar del cartelError
 
-///Crear alerta pequeña
+let btnCloseError = document.querySelector("#alertToast button");
 
+btnCloseError.addEventListener("click" , ()=>{
+    desHacerBlock();
+})
 
-// FUNCION DES/APARECER KG seccion
+//BOTON PARA CALCULAR TOTAL
 
-function desAparecerKG() {
-    document.querySelector("#collapseOne div label").classList.toggle("ocultarSINO");
-    document.querySelector("#cantKG").classList.toggle("ocultarSINO");
-    document.querySelector("#collapseOne div div button").classList.toggle("ocultarSINO");
-}
+let btnTotal= document.querySelector("#botonFin button");
 
-// FUNCION DES/APARECER SABORES seccion
+btnTotal.addEventListener("click" , ()=>{
+    calculandoTotal();
+})
 
-function desAparecerSabores() {
-    document.querySelector("#collapseOne .seccionSabor").classList.toggle("ocultarSINO");
-    
+//BOTON CERRAR TOTAL
 
-}
+let btnCerrarTotal= document.querySelector(".cardTotal button");
+
+btnCerrarTotal.addEventListener("click" ,()=>{
+    document.querySelector(".cardTotal").classList.toggle("ocultarSINO");
+    desHacerBlock();
+})
 
 // FUNCION DES/APARECER CIUDAD seccion
 
@@ -265,22 +254,6 @@ function cargaPedido(arrayAux,numPedido) {
     }
 }
 
-//FUNCION INICIAR ARRAY 
-
-function iniciarArray(arrayAIniciar){
-    for (let i=0;i<arrayAIniciar.length;i++){
-        arrayAIniciar[i]= 0;
-    }
-}
-
-//FUNCION INICIAR ARRAY BOOLEAN
-
-function iniciarArrayBoolean(arrayAIniciar){
-    for (let i=0;i<arrayAIniciar.length;i++){
-        arrayAIniciar[i]= false;
-    }
-}
-
 //FUNCION UNCHEK-FORM
 
 function unchekForm(checklistArray){
@@ -289,17 +262,33 @@ function unchekForm(checklistArray){
     }
 }
 
+//INICIALIZACION TEMPORALES
+
+let totalElegidos = 0;
+let condicionCompra = false;
+let auxPedido = new Array(11);
+export let auxNombres = new Array(11);
+
+function inicializarAuxiliares(){
+    totalElegidos = 0;
+    condicionCompra = false;
+    iniciarArray(auxNombres);
+    iniciarArray(auxPedido);
+}
+
                                                     //Gestion del carro de compras
+
+
 
 //Crear array carrito
 
-let arrayCarrito = new Array (11);
-iniciarArray(arrayCarrito);
+export let arrayCarrito = new Array (11);
 
+iniciarArray(arrayCarrito);
 
 //array carrito depende de otro array para procesar la carga de helado por KG
 
-let arrayPedidosKG = new Array(10);
+export let arrayPedidosKG = new Array(10);
 
     for (let i=0;i<arrayPedidosKG.length;i++){
         arrayPedidosKG[i]= new Array(11);
@@ -312,34 +301,3 @@ for (let i=0;i<arrayPedidosKG.length;i++){
         arrayPedidosKG[i][j]=0;
     }
 }
-
-//el recorrido del array del indice J tiene que ser al reves (decrementando) para no procesar todo el array si no hay ningun pedido figurando.
-
-function recorriendoPedidos(X){
-    let cuentaPedidos = 0;
-    let condicionCorte = false;
-    //rellenar recorrido, ya tengo las condiciones para pararlo y q no se complete
-}
-
-
-//arrayPrecios utilizara la misma estructura que arrayCarrito, solo que en la primer variable
-//el primer elemento es un array que contiene los precios del kg de helado
-let arrayPrecios = new Array (11);
-
-arrayPrecios[0] = new Array (4);
-
-//declaracion de precios
-arrayPrecios[0][0]=600;
-arrayPrecios[0][1]=1200;
-arrayPrecios[0][2]=1800;
-arrayPrecios[0][3]=2200;
-arrayPrecios[1]= 1500;
-arrayPrecios[2]= 1000;
-arrayPrecios[3]= 2000;
-arrayPrecios[4]= 1500;
-arrayPrecios[5]= 1500;
-arrayPrecios[6]= 1500;
-arrayPrecios[7]= 200;
-arrayPrecios[8]= 100;
-arrayPrecios[9]= 200;
-arrayPrecios[10]= 200;

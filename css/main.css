@@ -50,29 +50,27 @@ body {
     background-color: #ff4545;
 }
 
-.btnError {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 10%;
-    height: 20vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: white;
-    border-radius: 25px;
-    color: #ff4545;
-
-}
-
-.btnErrorTitulo {
-    background-color: #680747;
-    height: auto;
-    color: white;
-    display: flex;
-    justify-content: center;
-}
-
 .noClick {
     pointer-events: none;
-}
+    opacity: 0.1;
+ }
+
+ .centrarAlert{
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+ }
+
+ .centrarTotal{
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 30%;
+    left: 0;
+    right: 0;
+    text-align: center;
+ }
